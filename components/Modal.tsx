@@ -9,13 +9,14 @@ import {
   Animated,
   Dimensions,
   PanResponder,
+  StyleSheet,
 } from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import styles from './styles';
 
 import FastImage from 'react-native-fast-image';
+import Colors from '../constants/Colors';
 
-const ChoModal = ({itemData, modalVisible, setModalVisible}) => {
+const Modals = ({itemData, modalVisible, setModalVisible}) => {
   const [imgLoad, setImgLoad] = useState(false);
 
   const item = itemData;
@@ -80,25 +81,10 @@ const ChoModal = ({itemData, modalVisible, setModalVisible}) => {
         </TouchableWithoutFeedback>
         <Animated.View
           style={{
-            ...(styles.bottomSheetContainer, {height: 200}),
+            ...styles.bottomSheetContainer,
             transform: [{translateY: translateY}],
           }}
           {...panResponders.panHandlers}>
-          {/* <View style={styles.navigatorBar}>
-            <View style={styles.barContainer}>
-              <TouchableOpacity>
-                <Image
-                  source={require('../../../assets/images/goLeft.png')}
-                  resizeMode="contain"
-                  style={styles.imageStyle}
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.barTitleContainer}>
-              <Text style={styles.barTitleText}>세부화면</Text>
-            </View>
-          </View> */}
-
           <View style={styles.middleContainer}>
             <View style={styles.imageContianer}>
               <Image
@@ -121,4 +107,75 @@ const ChoModal = ({itemData, modalVisible, setModalVisible}) => {
   );
 };
 
-export default ChoModal;
+const styles = StyleSheet.create({
+  back: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    justifyContent: 'center',
+  },
+  background: {
+    flex: 1,
+  },
+  bottomSheetContainer: {
+    width: '100%',
+    height: '70%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+
+  middleContainer: {
+    display: 'flex',
+    width: '100%',
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.light.background,
+    paddingHorizontal: 30,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  imageContianer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '100%',
+    padding: 20,
+    backgroundColor: Colors.light.imageBackground,
+  },
+  itemImage: {
+    // width: '70%',
+    // height: '70%',
+    width: '100%',
+    height: '100%',
+  },
+  contentContainer: {
+    flex: 1,
+    display: 'flex',
+    width: '70%',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    padding: 20,
+    //backgroundColor: 'purple',
+    //justifyContent: 'space-around',
+  },
+  numberContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+  },
+  textAlbum: {
+    fontSize: 16,
+  },
+  textId: {
+    fontSize: 16,
+  },
+  textTitle: {
+    fontSize: 20,
+  },
+});
+export default Modals;

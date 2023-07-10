@@ -6,6 +6,7 @@ import axios from 'axios';
 import styles from './styles';
 import ChoModal from '../Render/ChoModal';
 import RenderHorizontal from '../Render/RenderHorizontal';
+import Modals from '../../components/Modal';
 
 export interface Datas {
   albumId: number;
@@ -93,11 +94,16 @@ const MeScreen = () => {
             />
           </View>
         </View>
-        <ChoModal
+        <Modals
           itemData={eachData}
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
         />
+        {/* <ChoModal
+          itemData={eachData}
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+        /> */}
       </View>
     </SafeAreaView>
   );

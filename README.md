@@ -1,5 +1,11 @@
 # skElecTest
+# branch
+- version1 : redux 적용 전 useState와 props로 상태관리
+- version2 : redux 적용
 
+# branch
+- version1 : redux 적용 전 useState와 props로 상태관리
+- version2 : redux 적용
 # 개발환경
 - m1 MacPro
 - node 18.12.0

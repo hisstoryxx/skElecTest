@@ -2,49 +2,12 @@ import {StyleSheet} from 'react-native';
 import Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    height: '100%',
-    flexDirection: 'column',
-    paddingHorizontal: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'red',
-  },
-  paddingContainer: {
-    display: 'flex',
-    flex: 1,
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'blue',
-  },
-  titleContainer: {
-    display: 'flex',
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'green',
-  },
-  titleText: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  listContainer: {
-    display: 'flex',
-    flex: 5,
-    flexDirection: 'row',
-    paddingHorizontal: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'yellow',
-  },
   renderContainer: {
     display: 'flex',
     flexDirection: 'row',
     width: '100%',
     borderRadius: 20,
-    backgroundColor: '#ddd',
+    backgroundColor: Colors.light.tabBackground,
     padding: 10,
     marginVertical: 5,
   },
@@ -60,6 +23,7 @@ const styles = StyleSheet.create({
   itemImage: {
     width: 50,
     height: 50,
+    borderRadius: 30,
   },
   contentContainer: {
     flex: 1,
@@ -82,7 +46,6 @@ const styles = StyleSheet.create({
   },
   textTitle: {
     fontSize: 20,
-    backgroundColor: 'red',
   },
 });
 

@@ -8,7 +8,7 @@ const StoreScreen = () => {
     <SafeAreaView>
       <View style={styles.container}>
         <Text>스토어</Text>
-        <Text>lottie animation</Text>
+        <Text>lottie animation 3초뒤 사라짐</Text>
       </View>
     </SafeAreaView>
   );

@@ -5,10 +5,18 @@ import styles from './styles';
 import axios from 'axios';
 import RenderItem from '../Render';
 
+export interface Datas {
+  albumId: number;
+  id: number;
+  title: string;
+  url: string;
+  thumbnailUrl: string;
+}
+
 const ChargeScreen = () => {
   // https://jsonplaceholder.typicode.com/photos
   // https://jsonplaceholder.typicode.com/photos/?albumId=${currentPage}
-  const [datas, setDatas] = useState([]);
+  const [datas, setDatas] = useState<Datas[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
 
   const getData = async () => {

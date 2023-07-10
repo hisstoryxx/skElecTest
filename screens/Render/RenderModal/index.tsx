@@ -19,7 +19,7 @@ const RenderModal = ({itemData, bannerWidth}) => {
 
   return (
     <TouchableOpacity
-      style={[styles.renderContainer, {width: bannerWidth - 40}]}
+      style={[styles.renderContainer, {width: bannerWidth}]}
       onPress={() => goDetail()}>
       <View style={styles.middleContainer}>
         <View style={styles.imageContianer}>

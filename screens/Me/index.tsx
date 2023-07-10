@@ -21,6 +21,7 @@ const MeScreen = () => {
   const [currentPage, setCurrentPage] = useState(0);
 
   const [bannerWidth, setBannerWidth] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getData = async () => {
     const data = await axios.get(
@@ -39,19 +40,22 @@ const MeScreen = () => {
   };
 
   const loadMoreItem = () => {
-    setCurrentPage(currentPage + 1);
+    // 불러올때 다음 페이지로 넘어가지 않게 예외처리
+    if (!isLoading) {
+      setCurrentPage(currentPage + 1);
+    }
   };
 
   useEffect(() => {
+    setIsLoading(true);
     getData();
+    setIsLoading(false);
   }, [currentPage]);
 
   const onLayout = event => {
     const {x, y, height, width} = event.nativeEvent.layout;
     setBannerWidth(width);
   };
-
-  console.log(bannerWidth);
 
   return (
     <SafeAreaView>
@@ -75,6 +79,7 @@ const MeScreen = () => {
               horizontal={true}
               pagingEnabled
               showsHorizontalScrollIndicator={false}
+              disableIntervalMomentum={true}
             />
           </View>
         </View>

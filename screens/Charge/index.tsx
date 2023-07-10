@@ -94,6 +94,7 @@ const ChargeScreen = () => {
               ListFooterComponent={renderLoader}
               onEndReached={loadMoreItem}
               onEndReachedThreshold={0}
+              showsVerticalScrollIndicator={false}
             />
           </View>
         </View>

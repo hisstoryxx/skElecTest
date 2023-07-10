@@ -20,8 +20,8 @@ const RenderVertical = ({itemData}) => {
     <TouchableOpacity style={styles.renderContainer} onPress={() => goDetail()}>
       <View style={styles.middleContainer}>
         <View style={styles.imageContianer}>
-          {/* <Image style={styles.itemImage} source={{uri: item?.thumbnailUrl}} /> */}
-          {!imgLoad && (
+          <Image style={styles.itemImage} source={{uri: item?.thumbnailUrl}} />
+          {/* {!imgLoad && (
             <FastImage
               style={styles.itemImage}
               source={require('../../../assets/images/pholder.png')}
@@ -34,7 +34,7 @@ const RenderVertical = ({itemData}) => {
             }}
             onLoadEnd={() => setImgLoad(true)}
             resizeMode={FastImage.resizeMode.contain}
-          />
+          /> */}
         </View>
         <View style={styles.contentContainer}>
           <View style={styles.numberContainer}>

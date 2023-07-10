@@ -23,7 +23,7 @@ const MeScreen = () => {
   const [datas, setDatas] = useState<Datas[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
 
-  const [bannerWidth, setBannerWidth] = useState(0);
+  // const [bannerWidth, setBannerWidth] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
   const [eachData, setEachData] = useState<Datas>();
@@ -57,10 +57,10 @@ const MeScreen = () => {
     setIsLoading(false);
   }, [currentPage]);
 
-  const onLayout = event => {
-    const {x, y, height, width} = event.nativeEvent.layout;
-    setBannerWidth(width);
-  };
+  // const onLayout = event => {
+  //   const {x, y, height, width} = event.nativeEvent.layout;
+  //   setBannerWidth(width);
+  // };
 
   return (
     <SafeAreaView>
@@ -77,7 +77,7 @@ const MeScreen = () => {
               renderItem={({item}) => (
                 <RenderHorizontal
                   itemData={item}
-                  bannerWidth={bannerWidth}
+                  // bannerWidth={bannerWidth}
                   setEachData={setEachData}
                   modalVisible={modalVisible}
                   setModalVisible={setModalVisible}

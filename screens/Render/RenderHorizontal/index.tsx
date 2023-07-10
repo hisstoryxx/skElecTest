@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {Text, View, Image} from 'react-native';
+import {Text, View, Image, useWindowDimensions} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import styles from './styles';
 
@@ -8,7 +8,7 @@ import FastImage from 'react-native-fast-image';
 
 const RenderHorizontal = ({
   itemData,
-  bannerWidth,
+  // bannerWidth,
   setEachData,
   modalVisible,
   setModalVisible,
@@ -24,14 +24,16 @@ const RenderHorizontal = ({
     setModalVisible(true);
   };
 
+  const {width} = useWindowDimensions();
+
   return (
     <TouchableOpacity
-      style={[styles.renderContainer, {width: bannerWidth}]}
+      style={[styles.renderContainer, {width: width - 60}]}
       onPress={() => goDetail()}>
       <View style={styles.middleContainer}>
         <View style={styles.imageContianer}>
-          {/* <Image style={styles.itemImage} source={{uri: item?.thumbnailUrl}} /> */}
-          {!imgLoad && (
+          <Image style={styles.itemImage} source={{uri: item?.thumbnailUrl}} />
+          {/* {!imgLoad && (
             <FastImage
               style={styles.itemImage}
               source={require('../../../assets/images/pholder.png')}
@@ -44,7 +46,7 @@ const RenderHorizontal = ({
             }}
             onLoadEnd={() => setImgLoad(true)}
             resizeMode={FastImage.resizeMode.contain}
-          />
+          /> */}
         </View>
         <View style={styles.contentContainer}>
           <View style={styles.numberContainer}>

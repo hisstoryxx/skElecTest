@@ -6,7 +6,7 @@ import styles from './styles';
 const DetailScreen = () => {
   const route = useRoute();
   const itemData = route.params;
-  console.log(itemData);
+  // console.log(itemData);
   const navigation = useNavigation();
   const goBack = () => {
     navigation.goBack();

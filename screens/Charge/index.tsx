@@ -3,50 +3,48 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {Text, View, Image, FlatList, ActivityIndicator} from 'react-native';
 import styles from './styles';
 import axios from 'axios';
+import RenderItem from '../Render';
 
 const ChargeScreen = () => {
   // https://jsonplaceholder.typicode.com/photos
   // https://jsonplaceholder.typicode.com/photos/?albumId=${currentPage}
   const [datas, setDatas] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
 
   const getData = async () => {
-    setIsLoading(true);
     const data = await axios.get(
       `https://jsonplaceholder.typicode.com/photos/?albumId=${currentPage}`,
     );
     // .catch(error => console.log(error));
     setDatas([...datas, ...data?.data]);
-    setIsLoading(false);
   };
 
-  const renderItem = ({item}) => {
-    return (
-      <View style={styles.renderContainer}>
-        <View style={styles.middleContainer}>
-          <View style={styles.imageContianer}>
-            <Image
-              style={styles.itemImage}
-              source={{uri: item?.thumbnailUrl}}
-            />
-          </View>
-          <View style={styles.contentContainer}>
-            <View style={styles.numberContainer}>
-              <Text style={styles.textAlbum}>AlbumId : {item?.albumId}</Text>
-              <Text style={styles.textId}>Id : {item?.id}</Text>
-            </View>
-            <Text
-              numberOfLines={2}
-              ellipsizeMode="tail"
-              style={styles.textTitle}>
-              Title : {item?.title}{' '}
-            </Text>
-          </View>
-        </View>
-      </View>
-    );
-  };
+  // const renderItem = ({item}) => {
+  //   return (
+  //     <View style={styles.renderContainer}>
+  //       <View style={styles.middleContainer}>
+  //         <View style={styles.imageContianer}>
+  //           <Image
+  //             style={styles.itemImage}
+  //             source={{uri: item?.thumbnailUrl}}
+  //           />
+  //         </View>
+  //         <View style={styles.contentContainer}>
+  //           <View style={styles.numberContainer}>
+  //             <Text style={styles.textAlbum}>AlbumId : {item?.albumId}</Text>
+  //             <Text style={styles.textId}>Id : {item?.id}</Text>
+  //           </View>
+  //           <Text
+  //             numberOfLines={2}
+  //             ellipsizeMode="tail"
+  //             style={styles.textTitle}>
+  //             Title : {item?.title}{' '}
+  //           </Text>
+  //         </View>
+  //       </View>
+  //     </View>
+  //   );
+  // };
 
   const renderLoader = () => {
     return (
@@ -76,7 +74,7 @@ const ChargeScreen = () => {
           <View style={styles.listContainer}>
             <FlatList
               data={datas}
-              renderItem={renderItem}
+              renderItem={({item}) => <RenderItem itemData={item} />}
               keyExtractor={item => item.id}
               ListFooterComponent={renderLoader}
               onEndReached={loadMoreItem}

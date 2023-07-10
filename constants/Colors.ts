@@ -10,6 +10,7 @@ export default {
     tabIconSelected: main_color,
     description: '#A0A0A0',
     tabBackground: '#FAFAFA',
+    imageBackground: '#FAFAFA',
   },
   dark: {
     text: '#fff',

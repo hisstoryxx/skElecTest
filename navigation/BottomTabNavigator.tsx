@@ -5,9 +5,19 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import {BottomTabParamList} from '../types';
+import {
+  BottomTabParamList,
+  TabChargeParamList,
+  TabMeParamList,
+  TabStoreParamList,
+  TabWholeParamList,
+} from '../types';
 import {createStackNavigator} from '@react-navigation/stack';
+
 import TabStoreScreen from '../TabScreens/TabStoreScreen';
+import TabChargeScreen from '../TabScreens/TabChargeScreen';
+import TabMeScreen from '../TabScreens/TabMeScreen';
+import TabWholeScreen from '../TabScreens/TabWholeScreen';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -56,7 +66,7 @@ const BottomTabNavigator = () => {
         />
         <BottomTab.Screen
           name="충전소"
-          component={TabStoreNavigator}
+          component={TabChargeNavigator}
           options={{
             headerShown: false,
             tabBarShowLabel: false,
@@ -93,7 +103,7 @@ const BottomTabNavigator = () => {
         />
         <BottomTab.Screen
           name="나"
-          component={TabStoreNavigator}
+          component={TabMeNavigator}
           options={{
             headerShown: false,
             tabBarShowLabel: false,
@@ -130,7 +140,7 @@ const BottomTabNavigator = () => {
         />
         <BottomTab.Screen
           name="전체"
-          component={TabStoreNavigator}
+          component={TabWholeNavigator}
           options={{
             headerShown: false,
             tabBarShowLabel: false,
@@ -186,5 +196,54 @@ const TabStoreNavigator = () => {
     </TabStoreStack.Navigator>
   );
 };
+
+const TabChargeStack = createStackNavigator<TabChargeParamList>();
+
+const TabChargeNavigator = () => {
+  return (
+    <TabChargeStack.Navigator>
+      <TabChargeStack.Screen
+        name="TabChargeScreen"
+        component={TabChargeScreen}
+        options={{
+          headerShown: false,
+          headerBackTitleVisible: false,
+        }}
+      />
+    </TabChargeStack.Navigator>
+  );
+};
+
+const TabMeStack = createStackNavigator<TabMeParamList>();
+
+const TabMeNavigator = () => {
+  return (
+    <TabMeStack.Navigator>
+      <TabMeStack.Screen
+        name="TabMeScreen"
+        component={TabMeScreen}
+        options={{
+          headerShown: false,
+          headerBackTitleVisible: false,
+        }}
+      />
+    </TabMeStack.Navigator>
+  );
+};
+
+const TabWholeStack = createStackNavigator<TabWholeParamList>();
+
+const TabWholeNavigator = () => (
+  <TabWholeStack.Navigator>
+    <TabWholeStack.Screen
+      name="TabChargeScreen"
+      component={TabWholeScreen}
+      options={{
+        headerShown: false,
+        headerBackTitleVisible: false,
+      }}
+    />
+  </TabWholeStack.Navigator>
+);
 
 export default BottomTabNavigator;

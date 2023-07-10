@@ -9,3 +9,19 @@ export type BottomTabParamList = {
   나: undefined;
   전체: undefined;
 };
+
+export type TabStoreParamList = {
+  TabStoreScreen: undefined;
+};
+
+export type TabChargeParamList = {
+  TabChargeScreen: undefined;
+};
+
+export type TabMeParamList = {
+  TabMeScreen: undefined;
+};
+
+export type TabWholeParamList = {
+  TabWholeScreen: undefined;
+};

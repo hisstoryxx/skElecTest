@@ -71,7 +71,9 @@ const MeScreen = () => {
               공용 API 를 활용하여 가로형 무한스크롤 화면 구성
             </Text>
           </View>
-          <View onLayout={onLayout} style={styles.listContainer}>
+          <View
+            // onLayout={onLayout}
+            style={styles.listContainer}>
             <FlatList
               data={datas}
               renderItem={({item}) => (

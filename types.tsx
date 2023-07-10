@@ -1,6 +1,8 @@
 export type RootStackParamList = {
   Root: undefined;
   BottomTabNavigator: undefined;
+  ChargeScreen: undefined;
+  MeScreen: undefined;
 };
 
 export type BottomTabParamList = {

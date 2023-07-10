@@ -24,11 +24,11 @@ const RenderItem = ({itemData}) => {
           {!imgLoad && (
             <FastImage
               style={styles.itemImage}
-              source={require('../../assets/images/pholder.png')}
+              source={require('../../../assets/images/pholder.png')}
             />
           )}
           <FastImage
-            style={[styles.itemImage, imgLoad ? {} : {width: 0}]}
+            style={[styles.itemImage, imgLoad ? {} : {width: 0, height: 0}]}
             source={{
               uri: `${item?.thumbnailUrl}`,
             }}

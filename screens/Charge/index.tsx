@@ -3,7 +3,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {Text, View, Image, FlatList, ActivityIndicator} from 'react-native';
 import styles from './styles';
 import axios from 'axios';
-import RenderItem from '../Render';
+import RenderItem from '../Render/RenderScreen';
 
 export interface Datas {
   albumId: number;
@@ -18,6 +18,8 @@ const ChargeScreen = () => {
   // https://jsonplaceholder.typicode.com/photos/?albumId=${currentPage}
   const [datas, setDatas] = useState<Datas[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const getData = async () => {
     const data = await axios.get(
@@ -63,11 +65,16 @@ const ChargeScreen = () => {
   };
 
   const loadMoreItem = () => {
-    setCurrentPage(currentPage + 1);
+    // 불러올때 다음 페이지로 넘어가지 않게 예외처리
+    if (!isLoading) {
+      setCurrentPage(currentPage + 1);
+    }
   };
 
   useEffect(() => {
+    setIsLoading(true);
     getData();
+    setIsLoading(false);
   }, [currentPage]);
 
   return (

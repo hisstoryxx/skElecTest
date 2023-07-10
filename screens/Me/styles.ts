@@ -4,7 +4,7 @@ import Colors from '../../constants/Colors';
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: '100%',
+    height: '70%',
     flexDirection: 'column',
     paddingHorizontal: 30,
     justifyContent: 'center',

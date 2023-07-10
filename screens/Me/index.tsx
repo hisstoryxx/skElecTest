@@ -3,8 +3,9 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {ActivityIndicator, FlatList, Text, View} from 'react-native';
 import axios from 'axios';
 // import RenderItem from '../Render/RenderScreen';
-import RenderModal from '../Render/RenderModal';
 import styles from './styles';
+import ChoModal from '../Render/ChoModal';
+import RenderHorizontal from '../Render/RenderHorizontal';
 
 export interface Datas {
   albumId: number;
@@ -15,6 +16,7 @@ export interface Datas {
 }
 
 const MeScreen = () => {
+  const [modalVisible, setModalVisible] = useState(false);
   // https://jsonplaceholder.typicode.com/photos
   // https://jsonplaceholder.typicode.com/photos/?albumId=${currentPage}
   const [datas, setDatas] = useState<Datas[]>([]);
@@ -22,6 +24,8 @@ const MeScreen = () => {
 
   const [bannerWidth, setBannerWidth] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [eachData, setEachData] = useState<Datas>();
 
   const getData = async () => {
     const data = await axios.get(
@@ -70,7 +74,13 @@ const MeScreen = () => {
             <FlatList
               data={datas}
               renderItem={({item}) => (
-                <RenderModal itemData={item} bannerWidth={bannerWidth} />
+                <RenderHorizontal
+                  itemData={item}
+                  bannerWidth={bannerWidth}
+                  setEachData={setEachData}
+                  modalVisible={modalVisible}
+                  setModalVisible={setModalVisible}
+                />
               )}
               keyExtractor={item => item.id}
               ListFooterComponent={renderLoader}
@@ -83,6 +93,11 @@ const MeScreen = () => {
             />
           </View>
         </View>
+        <ChoModal
+          itemData={eachData}
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+        />
       </View>
     </SafeAreaView>
   );

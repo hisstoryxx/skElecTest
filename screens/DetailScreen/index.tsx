@@ -38,9 +38,7 @@ const DetailScreen = () => {
             <Text style={styles.textAlbum}>AlbumId : {itemData?.albumId}</Text>
             <Text style={styles.textId}>Id : {itemData?.id}</Text>
           </View>
-          <Text numberOfLines={2} ellipsizeMode="tail" style={styles.textTitle}>
-            Title : {itemData?.title}{' '}
-          </Text>
+          <Text style={styles.textTitle}>Title : {itemData?.title} </Text>
         </View>
       </View>
     </View>

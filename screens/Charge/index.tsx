@@ -3,7 +3,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {Text, View, Image, FlatList, ActivityIndicator} from 'react-native';
 import styles from './styles';
 import axios from 'axios';
-import RenderItem from '../Render/RenderScreen';
+import RenderVertical from '../Render/RenderVertical';
 
 export interface Datas {
   albumId: number;
@@ -89,7 +89,7 @@ const ChargeScreen = () => {
           <View style={styles.listContainer}>
             <FlatList
               data={datas}
-              renderItem={({item}) => <RenderItem itemData={item} />}
+              renderItem={({item}) => <RenderVertical itemData={item} />}
               keyExtractor={item => item.id}
               ListFooterComponent={renderLoader}
               onEndReached={loadMoreItem}

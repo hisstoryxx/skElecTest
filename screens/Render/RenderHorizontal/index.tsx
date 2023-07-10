@@ -1,12 +1,18 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, View, Image} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import styles from './styles';
 
 import FastImage from 'react-native-fast-image';
 
-const RenderModal = ({itemData, bannerWidth}) => {
+const RenderHorizontal = ({
+  itemData,
+  bannerWidth,
+  setEachData,
+  modalVisible,
+  setModalVisible,
+}) => {
   const [imgLoad, setImgLoad] = useState(false);
 
   const item = itemData;
@@ -14,7 +20,8 @@ const RenderModal = ({itemData, bannerWidth}) => {
   const navigation = useNavigation();
 
   const goDetail = () => {
-    navigation.navigate('DetailScreen', item);
+    setEachData(item);
+    setModalVisible(true);
   };
 
   return (
@@ -53,4 +60,4 @@ const RenderModal = ({itemData, bannerWidth}) => {
   );
 };
 
-export default RenderModal;
+export default RenderHorizontal;

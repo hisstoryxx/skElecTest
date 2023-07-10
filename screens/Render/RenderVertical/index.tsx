@@ -6,7 +6,7 @@ import styles from './styles';
 
 import FastImage from 'react-native-fast-image';
 
-const RenderItem = ({itemData}) => {
+const RenderVertical = ({itemData}) => {
   const [imgLoad, setImgLoad] = useState(false);
   const item = itemData;
 
@@ -50,4 +50,4 @@ const RenderItem = ({itemData}) => {
   );
 };
 
-export default RenderItem;
+export default RenderVertical;

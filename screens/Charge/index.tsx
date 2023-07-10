@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {Text, View, Image, FlatList} from 'react-native';
+import {Text, View, Image, FlatList, ActivityIndicator} from 'react-native';
 import styles from './styles';
 import axios from 'axios';
 
@@ -8,24 +8,23 @@ const ChargeScreen = () => {
   // https://jsonplaceholder.typicode.com/photos
   // https://jsonplaceholder.typicode.com/photos/?albumId=${currentPage}
   const [datas, setDatas] = useState([]);
-  //const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getData = async () => {
-    const data = await axios.get('https://jsonplaceholder.typicode.com/photos');
+    setIsLoading(true);
+    const data = await axios.get(
+      `https://jsonplaceholder.typicode.com/photos/?albumId=${currentPage}`,
+    );
     // .catch(error => console.log(error));
     setDatas([...datas, ...data?.data]);
+    setIsLoading(false);
   };
 
   const renderItem = ({item}) => {
     return (
       <View style={styles.renderContainer}>
-        <View
-          style={{
-            display: 'flex',
-            flex: 1,
-            flexDirection: 'row',
-            backgroundColor: 'blue',
-          }}>
+        <View style={styles.middleContainer}>
           <View style={styles.imageContianer}>
             <Image
               style={styles.itemImage}
@@ -34,14 +33,14 @@ const ChargeScreen = () => {
           </View>
           <View style={styles.contentContainer}>
             <View style={styles.numberContainer}>
-              <Text style={styles.textAlbum}>albumId : {item?.albumId}</Text>
-              <Text style={styles.textId}>id : {item?.id}</Text>
+              <Text style={styles.textAlbum}>AlbumId : {item?.albumId}</Text>
+              <Text style={styles.textId}>Id : {item?.id}</Text>
             </View>
             <Text
               numberOfLines={2}
               ellipsizeMode="tail"
               style={styles.textTitle}>
-              title : {item?.title}{' '}
+              Title : {item?.title}{' '}
             </Text>
           </View>
         </View>
@@ -49,9 +48,21 @@ const ChargeScreen = () => {
     );
   };
 
+  const renderLoader = () => {
+    return (
+      <View>
+        <ActivityIndicator size="large" color="red" />
+      </View>
+    );
+  };
+
+  const loadMoreItem = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
   useEffect(() => {
     getData();
-  }, []);
+  }, [currentPage]);
 
   return (
     <SafeAreaView>
@@ -67,6 +78,9 @@ const ChargeScreen = () => {
               data={datas}
               renderItem={renderItem}
               keyExtractor={item => item.id}
+              ListFooterComponent={renderLoader}
+              onEndReached={loadMoreItem}
+              onEndReachedThreshold={0}
             />
           </View>
         </View>

@@ -48,6 +48,11 @@ const styles = StyleSheet.create({
     padding: 10,
     marginVertical: 5,
   },
+  middleContainer: {
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'row',
+  },
   imageContianer: {
     alignSelf: 'center',
     padding: 10,

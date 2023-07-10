@@ -10,9 +10,15 @@ import {useNavigation, useRoute} from '@react-navigation/core';
 import styles from './styles';
 import {ScrollView} from 'react-native-gesture-handler';
 
+import {useSelector, useDispatch} from 'react-redux';
+import {cartSlice} from '../../store/cartSlice';
+
 const DetailScreen = () => {
-  const route = useRoute();
-  const itemData = route.params;
+  // const route = useRoute();
+  // const itemData = route.params;
+
+  const itemData = useSelector(state => state.photos.selectedphotos);
+  console.log('itemData', itemData);
   // console.log(itemData);
   const navigation = useNavigation();
   const {width} = useWindowDimensions();

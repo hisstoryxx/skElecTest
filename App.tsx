@@ -20,6 +20,9 @@ import {
 import {RootNavigator} from './navigation';
 import {NavigationContainer} from '@react-navigation/native';
 
+import {Provider} from 'react-redux';
+import {store} from './store';
+
 import {
   Colors,
   DebugInstructions,
@@ -68,12 +71,14 @@ function App(): JSX.Element {
   };
 
   return (
-    <NavigationContainer>
-      <SafeAreaView style={backgroundStyle}>
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <RootNavigator />
-      </SafeAreaView>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <SafeAreaView style={backgroundStyle}>
+          <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+          <RootNavigator />
+        </SafeAreaView>
+      </NavigationContainer>
+    </Provider>
   );
 }
 

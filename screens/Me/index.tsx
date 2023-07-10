@@ -71,9 +71,10 @@ const MeScreen = () => {
               keyExtractor={item => item.id}
               ListFooterComponent={renderLoader}
               onEndReached={loadMoreItem}
-              onEndReachedThreshold={0.6}
+              onEndReachedThreshold={0}
               horizontal={true}
-              bounces={true}
+              pagingEnabled
+              showsHorizontalScrollIndicator={false}
             />
           </View>
         </View>

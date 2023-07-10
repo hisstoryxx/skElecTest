@@ -1,10 +1,13 @@
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, {useState} from 'react';
 import {Text, View, Image} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import styles from './styles';
 
+import FastImage from 'react-native-fast-image';
+
 const RenderItem = ({itemData}) => {
+  const [imgLoad, setImgLoad] = useState(false);
   const item = itemData;
 
   const navigation = useNavigation();
@@ -17,7 +20,21 @@ const RenderItem = ({itemData}) => {
     <TouchableOpacity style={styles.renderContainer} onPress={() => goDetail()}>
       <View style={styles.middleContainer}>
         <View style={styles.imageContianer}>
-          <Image style={styles.itemImage} source={{uri: item?.thumbnailUrl}} />
+          {/* <Image style={styles.itemImage} source={{uri: item?.thumbnailUrl}} /> */}
+          {!imgLoad && (
+            <FastImage
+              style={styles.itemImage}
+              source={require('../../assets/images/pholder.png')}
+            />
+          )}
+          <FastImage
+            style={[styles.itemImage, imgLoad ? {} : {width: 0}]}
+            source={{
+              uri: `${item?.thumbnailUrl}`,
+            }}
+            onLoadEnd={() => setImgLoad(true)}
+            resizeMode={FastImage.resizeMode.contain}
+          />
         </View>
         <View style={styles.contentContainer}>
           <View style={styles.numberContainer}>

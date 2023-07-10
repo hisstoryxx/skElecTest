@@ -74,26 +74,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  imageContianer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: '100%',
-    padding: 10,
-  },
   itemImage: {
     width: '70%',
     height: '70%',
   },
   contentContainer: {
-    flex: 1,
-    display: 'flex',
-    width: '70%',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    //backgroundColor: 'purple',
-    //justifyContent: 'space-around',
+    padding: 20,
   },
   numberContainer: {
     display: 'flex',
@@ -102,12 +88,15 @@ const styles = StyleSheet.create({
   },
   textAlbum: {
     fontSize: 16,
+    letterSpacing: 1.5,
   },
   textId: {
     fontSize: 16,
+    letterSpacing: 1.5,
   },
   textTitle: {
     fontSize: 20,
+    lineHeight: 30,
   },
 });
 

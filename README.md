@@ -1,6 +1,7 @@
 # skElecTest
 
 # 개발환경
+- m1 MacPro
 - node 18.12.0
 - ruby 2.7.6
 - react native 0.71

@@ -1,26 +1,61 @@
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, Pressable} from 'react-native';
 import {useDispatch} from 'react-redux';
+import {cartSlice} from '../store/cartSlice';
 
 const CartListItem = ({cartItem}) => {
   const dispatch = useDispatch();
 
-  const increaseQuantity = () => {};
+  const increaseQuantity = () => {
+    dispatch(
+      cartSlice.actions.changeQuantity({photoId: cartItem.photo.id, amount: 1}),
+    );
+  };
 
-  const decreaseQuantity = () => {};
+  const decreaseQuantity = () => {
+    dispatch(
+      cartSlice.actions.changeQuantity({
+        photoId: cartItem.photo.id,
+        amount: -1,
+      }),
+    );
+  };
 
   return (
     <View style={styles.container}>
-      <Image source={{uri: cartItem.product.image}} style={styles.image} />
+      <Image
+        source={{uri: cartItem?.photo?.thumbnailUrl}}
+        style={styles.image}
+      />
       <View style={styles.contentContainer}>
-        <Text style={styles.name}>{cartItem.product.name}</Text>
-        <Text style={styles.size}>Size {cartItem.size}</Text>
+        <Text style={styles.name}>AlbumId {cartItem.photo?.albumId}</Text>
+        <Text style={styles.size}>Id {cartItem.photo?.id}</Text>
 
         <View style={styles.footer}>
+          <Pressable
+            onPress={decreaseQuantity}
+            style={{
+              backgroundColor: 'gray',
+              width: 24,
+              height: 24,
+              borderRadius: 20,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text style={{fontSize: 24}}>-</Text>
+          </Pressable>
           <Text style={styles.quantity}>{cartItem.quantity}</Text>
-
-          <Text style={styles.itemTotal}>
-            {cartItem.product.price * cartItem.quantity}
-          </Text>
+          <Pressable
+            onPress={increaseQuantity}
+            style={{
+              backgroundColor: 'gray',
+              width: 24,
+              height: 24,
+              borderRadius: 20,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text style={{fontSize: 24}}>+</Text>
+          </Pressable>
         </View>
       </View>
     </View>

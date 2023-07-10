@@ -11,17 +11,18 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addCartItem: (state, action) => {
-      const newProduct = action.payload.product;
-      const cartItem = state.items.find(i => i.product.id === newProduct.id);
+      const newPhoto = action.payload.photo;
+      console.log('new', newPhoto);
+      const cartItem = state.items.find(i => i.photo.id === newPhoto.id);
       if (cartItem) {
         cartItem.quantity += 1;
       } else {
-        state.items.push({product: newProduct, quantity: 1});
+        state.items.push({photo: newPhoto, quantity: 1});
       }
     },
     changeQuantity: (state, action) => {
-      const {productId, amount} = action.payload;
-      const cartItem = state.items.find(item => item.product.id === productId);
+      const {photoId, amount} = action.payload;
+      const cartItem = state.items.find(item => item.photo.id === photoId);
       if (cartItem) {
         cartItem.quantity += amount;
       }
@@ -35,22 +36,5 @@ export const cartSlice = createSlice({
 
 export const selectNumberOfItems = state => state.cart.items.length;
 
-export const selectSubtotal = state =>
-  state.cart.items.reduce(
-    (sum, cartItem) => sum + cartItem.product.price * cartItem.quantity,
-    0,
-  );
-
-const cartSelector = state => state.cart;
-
-export const selectDeliveryPrice = createSelector(
-  cartSelector,
-  selectSubtotal,
-  (cart, subtotal) => (subtotal > cart.freeDeliveryFrom ? 0 : cart.deliveryFee),
-);
-
-export const selectTotal = createSelector(
-  selectSubtotal,
-  selectDeliveryPrice,
-  (subtotal, deliveryPrice) => subtotal + deliveryPrice,
-);
+export const selectTotal = state =>
+  state.cart.items.reduce((sum, cartItem) => sum + cartItem.quantity, 0);

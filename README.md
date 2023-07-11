@@ -1,5 +1,13 @@
 # skElecTest
+# branch
+- version1 : redux 적용 전 useState와 props로 상태관리
+- version2 : redux 적용
+             충전소 탭의 데이터를 redux로 처음부터 받아와서 세로형 list 만들고 세부화면을 연결하였고,
+             세부화면에서 add to cart 버튼을 누르면 전체 탭에 추가되고 개수 변경 가능
 
+# branch
+- version1 : redux 적용 전 useState와 props로 상태관리
+- version2 : redux 적용
 # 개발환경
 - m1 MacPro
 - node 18.12.0

@@ -1,9 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {Text, View, Image, FlatList, ActivityIndicator} from 'react-native';
+import {
+  Text,
+  View,
+  Image,
+  FlatList,
+  ActivityIndicator,
+  Pressable,
+} from 'react-native';
 import styles from './styles';
 import axios from 'axios';
 import RenderVertical from '../Render/RenderVertical';
+
+import {useSelector, useDispatch} from 'react-redux';
+import {photosSlice} from '../../store/photosSlice';
+import {useNavigation} from '@react-navigation/native';
 
 export interface Datas {
   albumId: number;
@@ -14,6 +25,7 @@ export interface Datas {
 }
 
 const ChargeScreen = () => {
+  const dispatch = useDispatch();
   // https://jsonplaceholder.typicode.com/photos
   // https://jsonplaceholder.typicode.com/photos/?albumId=${currentPage}
   const [datas, setDatas] = useState<Datas[]>([]);
@@ -26,6 +38,12 @@ const ChargeScreen = () => {
       `https://jsonplaceholder.typicode.com/photos/?albumId=${currentPage}`,
     );
     // .catch(error => console.log(error));
+    dispatch(
+      photosSlice.actions.addPhotosItem({
+        photos: data?.data,
+        current: currentPage,
+      }),
+    );
     setDatas([...datas, ...data?.data]);
   };
 
@@ -70,12 +88,23 @@ const ChargeScreen = () => {
       setCurrentPage(currentPage + 1);
     }
   };
+  const addToPhotos = () => {
+    console.log(datas);
+    dispatch(photosSlice.actions.addPhotosItem({photos: datas}));
+    console.log('run');
+  };
 
   useEffect(() => {
     setIsLoading(true);
     getData();
+
     setIsLoading(false);
   }, [currentPage]);
+  // useEffect(() => {
+  //   addToPhotos();
+  // }, [datas]);
+
+  const navigation = useNavigation();
 
   return (
     <SafeAreaView>
@@ -89,7 +118,53 @@ const ChargeScreen = () => {
           <View style={styles.listContainer}>
             <FlatList
               data={datas}
-              renderItem={({item}) => <RenderVertical itemData={item} />}
+              renderItem={({item}) => (
+                <Pressable
+                  onPress={() => {
+                    // update selected photos
+                    dispatch(photosSlice.actions.setSelectedphotos(item.id));
+                    navigation.navigate('DetailScreen');
+                  }}>
+                  <View style={styles.renderContainer}>
+                    <View style={styles.middleContainer}>
+                      <View style={styles.imageContianer}>
+                        <Image
+                          style={styles.itemImage}
+                          source={{uri: item?.thumbnailUrl}}
+                        />
+                        {/* {!imgLoad && (
+            <FastImage
+              style={styles.itemImage}
+              source={require('../../../assets/images/pholder.png')}
+            />
+          )}
+          <FastImage
+            style={[styles.itemImage, imgLoad ? {} : {width: 0, height: 0}]}
+            source={{
+              uri: `${item?.thumbnailUrl}`,
+            }}
+            onLoadEnd={() => setImgLoad(true)}
+            resizeMode={FastImage.resizeMode.contain}
+          /> */}
+                      </View>
+                      <View style={styles.contentContainer}>
+                        <View style={styles.numberContainer}>
+                          <Text style={styles.textAlbum}>
+                            AlbumId : {item?.albumId}
+                          </Text>
+                          <Text style={styles.textId}>Id : {item?.id}</Text>
+                        </View>
+                        <Text
+                          numberOfLines={2}
+                          ellipsizeMode="tail"
+                          style={styles.textTitle}>
+                          Title : {item?.title}{' '}
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </Pressable>
+              )}
               keyExtractor={item => item.id}
               ListFooterComponent={renderLoader}
               onEndReached={loadMoreItem}

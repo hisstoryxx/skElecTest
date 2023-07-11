@@ -98,6 +98,21 @@ const styles = StyleSheet.create({
     fontSize: 20,
     lineHeight: 30,
   },
+  button: {
+    position: 'absolute',
+    backgroundColor: 'black',
+    bottom: 30,
+    width: '90%',
+    alignSelf: 'center',
+    padding: 20,
+    borderRadius: 100,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: '500',
+    fontSize: 16,
+  },
 });
 
 export default styles;
